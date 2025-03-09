@@ -23,3 +23,10 @@ of calories and protein.
 ### Part3 
 I dont know anything
 #### Part 4
+Null Hypothesis: The average calories content is the same across all protein categories.
+Alternate Hypothesis: The average calorie content differs across protein categories. 
+Test stat: something find out
+sig-level=0.05
+p-val:1.0
+result: we reject the null that the average calore content is the same across all protein categories.
+This would be a helpful for our question because it tests to see if there is a relationship between calories and protein content.
