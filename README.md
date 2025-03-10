@@ -30,3 +30,9 @@ sig-level=0.05
 p-val:1.0
 result: we reject the null that the average calore content is the same across all protein categories.
 This would be a helpful for our question because it tests to see if there is a relationship between calories and protein content.
+#### Part 5
+The question we will be focusing our predictive model on is 'Predict calories of recipes' and we will be trying to figure out how create a regression model. The response variable would be calories given that our question is trying to figure out how many calories in a recipe. The metric we will be using to see how well our model performs is RMSE(change). We are using RMSE because it is used to measure average error between predicted values and 
+actual values since we want our model to be accurate as possible we need to have a model that has a low error so we will use RMSE.
+##### Part 6
+The specific model that we will be using is a linear regression model because our bivariate analysis show that calories and protein have a linear relationship. The first two features that we will be using for our baseline model are protein and n_ingredients. They both are quantitative columns which mean we don't need to perform any transformations or encoding. After performing RMSE on our current baseline we get 469.13903993999116 which isn't a good model because it is so high
+###### Part 7 
