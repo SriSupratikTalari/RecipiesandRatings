@@ -14,7 +14,6 @@ After merging the two dataframes into one, which we will be calling **receipes_i
 - **nutrition**: Contains lists of strings about nutritional facts such as calories, fats, protein, sugars, etc.  
 - **calories**: Contains a float representation of the total number of calories in a recipe.  
 
-## Part 2  
 <iframe
   src="protein.html"
   width="800"
@@ -27,6 +26,7 @@ After merging the two dataframes into one, which we will be calling **receipes_i
   height="600"
   frameborder="0"
 ></iframe>
+## Part 2  
 First, looking at the considerations section, we are told to replace all values of `0` in **rating** with `np.nan`, which we can accomplish by using `.replace()`.  
 
 The majority of the information that we need for this project comes from the **nutrition** column. Each row of the nutrition column has a string representation of a list with **7 elements** in total. To extract these elements:  
