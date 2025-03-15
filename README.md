@@ -51,9 +51,9 @@ We need to create at least **two plots** for **univariate analysis** and another
 For the **pivot table**, I used **cal_cat** and **protein_cat** as columns and **count** as the aggregation function. Looking at the table:  
 - The majority of the data is in the range **[0,25.0) for protein PDV proportion** and **[25000.0,50000.0) calorie PDV proportion**.  
 - This suggests a strong relationship between **protein and calorie** values in those ranges.  
-
-
-<iframe src="protein.html" width="800" height="600" frameborder="0"></iframe>
-<iframe src="total_fat.html" width="800" height="600" frameborder="0"></iframe>
-<iframe src="proteinxcal.html" width="800" height="600" frameborder="0"></iframe>
-<iframe src="totalxcal.html" width="800" height="600" frameborder="0"></iframe>
+<iframe
+  src="protein.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
