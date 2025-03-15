@@ -29,6 +29,10 @@ First for our univariate analysis I decided to create two box plots for protein 
 they both have many outliers with a very small mean and IQR. For our bivariate analysis I will also be using protein and total_fat. Lookt at both 
 of them they seem to have the same relationship meaning they both have a positive trend with many data points on top of one another between the zero
 to 10 PDV proportion range. For the pivot table I will be using cal_cat and protein_cat columns and count as the aggreation funciton. looking at the table we can see that the majority of the data is between [0,25.0) for protien PDV proportion and [25000.0,50000.0) calorie PDV proportion. Showing that there might be a strong relationship between these two columns between their given ranges.
+<iframe src="protein.html" width="800" height="600" frameborder="0"></iframe>
+<iframe src="total_fat.html" width="800" height="600" frameborder="0"></iframe>
+<iframe src="proteinxcal.html" width="800" height="600" frameborder="0"></iframe>
+<iframe src="totalxcal.html" width="800" height="600" frameborder="0"></iframe>
 ### Part3 
 Looking at recipie_interaction.inf0() we can see that there are multiple columns with missing values and I believe that filtered_tags
 is NMAR because it could be possible that there is a no tag for a given recipe because maybe there wasn't a tag that represneted how
