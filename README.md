@@ -26,6 +26,18 @@ a float representation of the total number of calories in a recipe.
   height="600"
   frameborder="0"
 ></iframe>
+<iframe
+  src="proteinxcal.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+<iframe
+  src="totalxcal.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 First looking at the considerations section we are told to replace all vals of 0 in rating with np.nan
 which we can accomplish by using .replace()
 The majority of the information that we need for this project comes from the the nutrition column. Each row of 
