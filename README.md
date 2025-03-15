@@ -38,7 +38,6 @@ These columns will contain the **bin** that the calorie, fat, or protein value b
 - Assigning the results to the dataframe.  
 
 ### Visualization  
-We need to create at least **two plots** for **univariate analysis** and another **two** for **bivariate analysis**.  
 <iframe
   src="protein.html"
   width="800"
@@ -51,6 +50,7 @@ We need to create at least **two plots** for **univariate analysis** and another
   height="600"
   frameborder="0"
 ></iframe>
+We need to create at least **two plots** for **univariate analysis** and another **two** for **bivariate analysis**.  
 - **Univariate Analysis**:  
   - **Two box plots** for protein and total fat.  
   - Both have many **outliers**, with a very **small mean and IQR**.  
