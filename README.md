@@ -15,6 +15,18 @@ After merging the two dataframes into one, which we will be calling **receipes_i
 - **calories**: Contains a float representation of the total number of calories in a recipe.  
 
 ## Part 2  
+<iframe
+  src="protein.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+<iframe
+  src="total_fat.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 First, looking at the considerations section, we are told to replace all values of `0` in **rating** with `np.nan`, which we can accomplish by using `.replace()`.  
 
 The majority of the information that we need for this project comes from the **nutrition** column. Each row of the nutrition column has a string representation of a list with **7 elements** in total. To extract these elements:  
@@ -38,18 +50,6 @@ These columns will contain the **bin** that the calorie, fat, or protein value b
 - Assigning the results to the dataframe.  
 
 ### Visualization  
-<iframe
-  src="protein.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
-<iframe
-  src="total_fat.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
 We need to create at least **two plots** for **univariate analysis** and another **two** for **bivariate analysis**.  
 - **Univariate Analysis**:  
   - **Two box plots** for protein and total fat.  
