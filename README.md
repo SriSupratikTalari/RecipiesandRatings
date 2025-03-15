@@ -76,12 +76,6 @@ We need to create at least **two plots** for **univariate analysis** and another
   - **Protein vs Calories**  
   - **Total Fat vs Calories**  
   - Both have a **positive trend**, with many data points clustering between the **0-10 PDV proportion range**.  
-
-| protein_cat / cal_cat     | [0.0, 25.0) | [25.0, 50.0) |
-|---------------------------|-------------|--------------|
-| [0, 25000.0)              | 234414      | 7            |
-| [25000.0, 50000.0)        | 7           | 1            |
-
 For the **pivot table**, I used **cal_cat** and **protein_cat** as columns and **count** as the aggregation function. Looking at the table:  
 - The majority of the data is in the range **[0,25.0) for protein PDV proportion** and **[25000.0,50000.0) calorie PDV proportion**.  
 - This suggests a strong relationship between **protein and calorie** values in those ranges.
