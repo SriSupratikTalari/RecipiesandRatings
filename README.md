@@ -44,67 +44,121 @@ These columns will contain the **bin** that the calorie, fat, or protein value b
 - Assigning the results to the dataframe.  
 
 ### Visualization  
-We need to create at least **two plots** for **univariate analysis** and another **two** for **bivariate analysis**.  
-<iframe
-  src="protein.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
-<iframe
-  src="total_fat.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
-- **Univariate Analysis**:  
-  - **Two box plots** for protein and total fat.  
-  - Both have many **outliers**, with a very **small mean and IQR**.  
-<iframe
-  src="proteinxcal.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
-<iframe
-  src="totalxcal.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
-- **Bivariate Analysis**:  
-  - **Protein vs Calories**  
-  - **Total Fat vs Calories**  
-  - Both have a **positive trend**, with many data points clustering between the **0-10 PDV proportion range**.  
-For the **pivot table**, I used **cal_cat** and **protein_cat** as columns and **count** as the aggregation function. Looking at the table:  
-- The majority of the data is in the range **[0,25.0) for protein PDV proportion** and **[25000.0,50000.0) calorie PDV proportion**.  
-- This suggests a strong relationship between **protein and calorie** values in those ranges.
-## Part3 
-Looking at recipie_interaction.info() we can see that there are multiple columns with missing values and I believe that filtered_tags
-is NMAR because it could be possible that there is a no tag for a given recipe because maybe there wasn't a tag that represneted how
-long it takes to make that recipe. For the missingness permuation test I will be testing it on the rating column. I will be testing it on 
-all of the numerical columns in our dataset. After performing our permuation test and appending those results into a list we can see that rating is MCAR for average_rating because we fail to reject the null
-and MAR for all the other numerical columns
-## Part 4
-Null Hypothesis: The average calories content is the same across all protein categories.
-Alternate Hypothesis: The average calorie content differs across protein categories. 
-Test stat: absolute difference of means
-sig-level=0.05
-p-val:1.0.0
-result: we reject the null that the average calore content is the same across all protein categories.
-I believe this would be a good question because we will be able to determine if protein has a factor in the trend of calories
-I believe this would be a good test statistic because it shows us the distribution of calories across the different groups and we can see if
-that distribution where to change if we change of up the protein categories. Looking at our p-val we can conclude that it is not likely that the 
-average calorie content across all protein cateogories are the same. 
-## Part 5
-The problem that we will be focusing on for our prediction model is 'Predict the number of calories'. This would be considered a regression model because we are trying to predict numerical values. The response variable that we will be foucsing on is the calorie column because our goal is trying to predict the number of calories in a given recipe. The metric that we will be using is RMSE because we are building a regression model and that it shows prediction error. 
-## Part 6
-The specific model that we will be using is a linear regression model because our bivariate analysis show that calories and protein have a linear relationship. The first two features that we will be using for our baseline model are protein and carbohydrates. They both are quantitative columns which mean we don't need to perform any transformations or encoding. After performing RMSE on our current baseline we get 248.69192187011018 on our test data. I believe this is bad because generally if RMSE is high that means that it's not a good model that makes the best predictions.
-## Part 7 
-For our final model I added three new features which are fat_cat, cal_cat, and sugars. I believe that fat_cat would help with predictions
-because a recipe could likely have higher calories if the total fats in it were above a certain range. I believe that cal_cat would because if we where to now what range the number of calories are in a recipe than we would have an easier time of trying to predict what the actual number of calories of a given recipe could be. Finally I added sugars because generally foods with more sugars tend to have high calories. for fat_cat and cal_cat I performed OneHotEncoding and for Sugars I used Binarizer with a threshold of 151.3. After performing the necessary transformation I then fited it into a pipeline with the polynomial degree as my hyperparameters from 1-5. After fiting it into one pipeline I then put that inside of GridSearchCV to find the best hyperparameters for our model. I got 1 as the best degree and then performed RMSE on our best model against the test data and got an improvment from our base model with the new RMSE being 219.51823848043935.
-## Part 8
-Null Hypothesis: The RSME is the same for both protein PDV proportions that meet the threshold of 25 and don't
-Alternative Hypothesis: The RSME is different between protein PDV proportions that meet the threshold of 25 and don't
-My group X for the fairness model is protein PDV proportion values that are below 25 and my Y is protein PDV proportion values that are above 25.
-The metric that I will be using is RMSE with my test statistic being the absolute difference of means and a test statistic of 0.05. After performing our test we see that we get a p-val of 0.0 which indicates that our model is likely not fair between the two groups.
+
+We need to create at least **two plots** for **univariate analysis** and another **two** for **bivariate analysis**.
+
+<iframe src="protein.html" width="800" height="600" frameborder="0"></iframe>
+<iframe src="total_fat.html" width="800" height="600" frameborder="0"></iframe>
+
+#### Univariate Analysis
+- Two **box plots** were created for **protein** and **total fat**.
+- Both plots contain many **outliers**, with a very **small mean and IQR**, indicating a right-skewed distribution.
+
+<iframe src="proteinxcal.html" width="800" height="600" frameborder="0"></iframe>
+<iframe src="totalxcal.html" width="800" height="600" frameborder="0"></iframe>
+
+#### Bivariate Analysis
+- **Protein vs Calories**
+- **Total Fat vs Calories**
+- Both plots show a **positive trend**, with many data points clustering between the **0–10 PDV proportion range**.
+
+For the **pivot table**, I used **cal_cat** and **protein_cat** as columns and **count** as the aggregation function. Looking at the table:
+- The majority of the data lies in the range **[0, 25.0)** for protein PDV proportion and **[25,000.0, 50,000.0)** for calorie PDV proportion.
+- This suggests a strong relationship between **protein** and **calorie** values in these ranges.
+
+---
+
+## Part 3: Missingness Analysis  
+
+Looking at `recipe_interaction.info()`, we can see that there are multiple columns with missing values. I believe that **filtered_tags** is **NMAR**, because it is possible that there is no tag for a given recipe if no tag accurately represents how long the recipe takes to make.
+
+For the missingness permutation test, I tested the **rating** column against all numerical columns in the dataset. After performing the permutation tests and appending the results into a list, we observe that:
+- **rating** is **MCAR** with respect to **average_rating**, because we fail to reject the null hypothesis.
+- **rating** is **MAR** with respect to all other numerical columns.
+
+---
+
+## Part 4: Hypothesis Testing  
+
+**Null Hypothesis:**  
+The average calorie content is the same across all protein categories.
+
+**Alternative Hypothesis:**  
+The average calorie content differs across protein categories.
+
+- **Test statistic:** Absolute difference of means  
+- **Significance level:** 0.05  
+- **p-value:** 1.0  
+
+**Result:**  
+We reject the null hypothesis that the average calorie content is the same across all protein categories.
+
+This is a good question to explore because it allows us to determine whether protein has a role in the trend of calories. The chosen test statistic is appropriate because it compares calorie distributions across different protein groups and allows us to observe how the distribution changes when protein categories change. Based on the p-value, it is unlikely that the average calorie content is the same across all protein categories.
+
+---
+
+## Part 5: Prediction Problem  
+
+The prediction problem focuses on **predicting the number of calories** in a recipe. This is a **regression problem**, since we are predicting a numerical value.
+
+- **Response variable:** Calories  
+- **Evaluation metric:** RMSE  
+
+RMSE is appropriate because it measures the average prediction error magnitude for regression models.
+
+---
+
+## Part 6: Baseline Model  
+
+The baseline model used is **linear regression**, since the bivariate analysis showed a linear relationship between calories and protein.
+
+The first two features used in the baseline model are:
+- **Protein**
+- **Carbohydrates**
+
+Both features are quantitative, so no transformations or encoding were required.
+
+After evaluating the baseline model, the RMSE on the test data is:
+
+- **RMSE:** 248.69192187011018  
+
+This RMSE value is relatively high, indicating that the baseline model does not make strong predictions.
+
+---
+
+## Part 7: Final Model  
+
+For the final model, three additional features were added:
+- **fat_cat**
+- **cal_cat**
+- **sugars**
+
+These features were chosen because recipes with higher fat or sugar content are more likely to have higher calorie values, and categorical calorie ranges may help improve predictions.
+
+- **fat_cat** and **cal_cat** were OneHotEncoded.
+- **sugars** was transformed using a **Binarizer** with a threshold of **151.3**.
+
+All transformations were included in a pipeline with polynomial degrees ranging from **1 to 5** as hyperparameters. This pipeline was then passed into **GridSearchCV** to find the optimal degree.
+
+- **Best polynomial degree:** 1  
+- **Final test RMSE:** 219.51823848043935  
+
+This represents an improvement over the baseline model.
+
+---
+
+## Part 8: Fairness Evaluation  
+
+**Null Hypothesis:**  
+The RMSE is the same for protein PDV proportions that meet the threshold of 25 and those that do not.
+
+**Alternative Hypothesis:**  
+The RMSE differs between protein PDV proportions that meet the threshold of 25 and those that do not.
+
+- **Group X:** Protein PDV proportion < 25  
+- **Group Y:** Protein PDV proportion ≥ 25  
+- **Metric:** RMSE  
+- **Test statistic:** Absolute difference of means  
+- **Significance level:** 0.05  
+
+After performing the fairness test, the resulting **p-value is 0.0**, which indicates that the model is likely **not fair** between the two protein PDV proportion groups.
