@@ -68,13 +68,20 @@ For the **pivot table**, I used **cal_cat** and **protein_cat** as columns and *
 
 ---
 
-## Part 3: Missingness Analysis  
+## Part 3: Missingness Analysis
 
-Looking at `recipe_interaction.info()`, we can see that there are multiple columns with missing values. I believe that **filtered_tags** is **NMAR**, because it is possible that there is no tag for a given recipe if no tag accurately represents how long the recipe takes to make.
+Looking at `receipes_interactions.info()`, we observe that several columns contain missing values. The `filtered_tags` column has missing values when a recipe does not have an associated time-based tag (e.g., minutes-or-less or hours-or-less). These missing values arise because the information is not applicable for certain recipes rather than due to randomness or dependence on other variables. Therefore, the missingness in `filtered_tags` is best described as structural missingness, rather than MCAR, MAR, or MNAR.
 
-For the missingness permutation test, I tested the **rating** column against all numerical columns in the dataset. After performing the permutation tests and appending the results into a list, we observe that:
-- **rating** is **MCAR** with respect to **average_rating**, because we fail to reject the null hypothesis.
-- **rating** is **MAR** with respect to all other numerical columns.
+To assess the missingness mechanism of the `rating` column, we conducted permutation tests comparing the means of numerical variables between rows with missing and non-missing ratings. This allowed us to determine whether the missingness in `rating` was associated with other observed features.
+
+After performing the permutation tests across all numerical columns in the dataset, we observe the following:
+
+- We fail to reject the null hypothesis for `average_rating`, indicating that missingness in `rating` does not depend on this variable. This is consistent with MCAR with respect to `average_rating`.
+- For all other numerical variables tested, we reject the null hypothesis, indicating that missingness in `rating` is associated with observed variables.
+
+### Conclusion
+
+Since missingness in `rating` is related to several observed variables, the data is not Missing Completely At Random (MCAR). However, because this missingness can be explained using observed data, it is consistent with a Missing At Random (MAR) assumption.
 
 ---
 
